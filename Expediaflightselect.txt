@@ -1,0 +1,123 @@
+package pages;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+public class Flight {
+	WebDriver driver;
+	By orgin=By.xpath("//*[@id=\"location-field-leg1-origin-menu\"]/div[1]/div[1]/button");
+	By org=By.xpath("//*[@id=\"location-field-leg1-origin\"]");
+	By source=By.xpath("//*[@id=\"location-field-leg1-origin-menu\"]/div[2]/div[2]/ul/li[6]/button/div/span");
+	By dest=By.xpath("//*[@id=\"location-field-leg1-destination-menu\"]/div[1]/div[1]/button");
+	By destination=By.id("location-field-leg1-destination");
+	By destinaion1=By.xpath("//*[@id=\"location-field-leg1-destination-menu\"]/div[2]/div[2]/ul/li[6]/button/div/span");
+	By datestart=By.id("d1-btn");
+	By datereturn=By.id("d2-btn");
+	By traveler=By.xpath("//*[@id=\"adaptive-menu\"]/button");
+	By selectclass=By.xpath("//*[@id=\"preferred-class-input-trigger\"]");
+	
+	
+	
+	
+	public Flight(WebDriver driver)
+	{
+		this.driver=driver;
+	}
+	public void setvalues(String orgin1,String dest1) throws Exception
+	{
+		driver.findElement(orgin).click();
+		driver.findElement(org).sendKeys(orgin1);
+		driver.findElement(source).click();
+		driver.findElement(dest).click();
+		driver.findElement(destination).sendKeys(dest1);
+		driver.findElement(destinaion1).click();
+		
+		driver.findElement(datestart).click();
+		while(true)
+		{
+			WebElement month=driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/h2"));
+			String month1=month.getText();
+			if(month1.equals("February 2023"))
+			{
+				System.out.println(month);
+				break;
+			}
+			else
+			{
+				driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[1]/div[1]/button[2]")).click();
+			}
+			
+		}
+		
+		List<WebElement> alldates= driver.findElements(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/table/tbody/tr/td/button"));
+		
+		for(WebElement dateelement:alldates)
+		{
+			String date=dateelement.getAttribute("data-day");
+			if(date.equals("10"))
+			{
+				dateelement.click();
+			}
+		}
+		driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div/button")).click();
+		driver.findElement(datereturn).click();
+		while(true)
+		{
+			WebElement month=driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/h2"));
+			String month1=month.getText();
+			if(month1.equals("April 2023"))
+			{
+				System.out.println(month);
+				break;
+			}
+			else
+			{
+				driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/button[2]")).click();
+			}
+			
+		}
+		
+		List<WebElement> alldates1= driver.findElements(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/table/tbody/tr/td/button"));
+		
+		for(WebElement dateelement:alldates1)
+		{
+			String date=dateelement.getAttribute("data-day");
+			if(date.equals("10"))
+			{
+				dateelement.click();
+			}
+		}
+		driver.findElement(By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/button")).click();
+		driver.findElement(traveler).click();
+		driver.findElement(By.xpath("//*[@id=\"adaptive-menu\"]/div/div/div/div[2]/section/div[1]/div[1]/div/button[2]")).click();
+		driver.findElement(By.xpath("//*[@id=\"adaptive-menu\"]/div/div/div/div[2]/section/div[1]/div[2]/div/button[2]")).click();
+		
+		WebElement age=driver.findElement(By.xpath("//*[@id=\"child-age-input-0-0\"]"));
+		Select agel=new Select(age);
+		agel.selectByVisibleText("3");		
+		driver.findElement(By.xpath("//*[@id=\"adaptive-menu\"]/div/div/div/div[3]/button")).click();
+		
+		
+		driver.findElement(selectclass).click();
+		driver.findElement(By.xpath("//*[@id=\"preferred-class-input\"]/div/div/a[4]")).click();
+		
+		
+		
+		driver.findElement(By.xpath("//*[@id=\"wizard-flight-pwa-1\"]/div[3]/div[2]/button")).click();
+		
+	}
+}
+
+
+
+
+
+
+
+
+

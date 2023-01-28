@@ -1,0 +1,37 @@
+package test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import pages.Flight;
+
+
+public class Flighttest {
+	WebDriver driver;
+	String Baseurl="https://www.expedia.com/";
+	@BeforeTest
+	public void setup()
+	{
+		driver=new ChromeDriver();
+	}
+	@BeforeMethod
+	public void url()
+	{
+		driver.get(Baseurl);
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//*[@id='wizardMainRegionV2']/div/div/div/div/ul/li[2]/a/span")).click();
+		
+	}
+	@Test
+	public void testselect() throws Exception
+	{
+		Flight ob=new Flight(driver);
+		ob.setvalues("newyork","brussels");
+		
+	}
+
+}
